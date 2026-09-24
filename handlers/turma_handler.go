@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-	"time"
 
 	"api-gin/models"
 	"github.com/gin-gonic/gin"
@@ -389,34 +388,6 @@ func ListarAlunosDaTurma(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, alunosDaTurma)
-}
-
-func validarHorario(horario string) bool {
-	_, err := time.Parse("15:04", horario)
-	return err == nil
-}
-
-func normalizarDia(dia string) string {
-	dia = strings.ToLower(strings.TrimSpace(dia))
-
-	switch dia {
-	case "segunda", "segunda-feira":
-		return "segunda"
-	case "terca", "terça", "terca-feira", "terça-feira":
-		return "terca"
-	case "quarta", "quarta-feira":
-		return "quarta"
-	case "quinta", "quinta-feira":
-		return "quinta"
-	case "sexta", "sexta-feira":
-		return "sexta"
-	case "sabado", "sábado":
-		return "sabado"
-	case "domingo":
-		return "domingo"
-	default:
-		return ""
-	}
 }
 
 func AlocarSala(c *gin.Context) {
